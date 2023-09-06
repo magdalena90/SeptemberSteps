@@ -3,7 +3,6 @@ library(plotly)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   
-  tags$script(src = 'javascript.js'),
   theme = 'styles.css',
   
   titlePanel('September Steps'),
@@ -12,8 +11,10 @@ ui <- fluidPage(
   sidebarLayout(
     div(class='filtros', 
         sidebarPanel(
+          radioButtons('unit', label = h4('Select the level of aggregation of the data:'),
+                       choices = list('By team' = 'Team', 'By person (top 10)' = 'Person')),
           radioButtons('plot_type', label = h4('Select what you want to visualise:'),
-                       choices = list('Daily step count' = 'daily', 'Cummulative step count' = 'cummulative'))
+                       choices = list('Daily step count' = 'Steps', 'Cummulative step count' = 'Cummulative_Steps'))
         )
     ),
     
