@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Amatic+SC&display=swap');
+
+h2 {
+  font-family: 'Amatic SC', cursive;
+  color: #35a4dc;
+  padding: 1em;
+  font-size: 5em;
+}
+
+@media (max-width: 500px) {
+  h2 { 
+    font-size: 2.3em;
+    text-align: center;
+  }
+}
+
+h3 {
+  font-family: 'Amatic SC', cursive;
+  color: #1a68b4;
+  font-size: 3em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+
+label {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.5em;
+}
+
+.filtros .well{
+  background-color:  #1a68b4;
+  padding: 1em 2em;
+  color: white;
+}
+
+.items {
+  font-family: 'Quicksand', sans-serif !important;
+  font-size: 2em;
+}
+
+#plot {
+  font-family: 'Quicksand', sans-serif !important;
+  font-size: 1.5em;
+  color: white;
+  text-align: left;
+}
+
+@media (max-width: 500px) {
+  #plot {
+    font-size: 1.3em;
+  }
+}
+
+a {
+  color: white;
+  text-decoration: underline;
+}
+
