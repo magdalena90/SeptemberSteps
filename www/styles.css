@@ -55,8 +55,16 @@ label {
   }
 }
 
+.nav-tabs {
+  margin-bottom: 1em;
+}
+
 a {
-  color: white;
-  text-decoration: underline;
+  color: gray;
+  backround-color: 'lightblue'
+}
+
+a:hover {
+  color: black;
 }
 
