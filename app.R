@@ -1,5 +1,6 @@
 
-setwd('~/Otros/SI pedometer challenge/')
+# setwd('~/Otros/SI pedometer challenge/')
+setwd('~/Otros/SI_September_steps')
 source('helper.R')
 source('server.R')
 
