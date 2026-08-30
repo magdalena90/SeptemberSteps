@@ -126,10 +126,15 @@ server <- function(input, output, clientData, session) {
              layout(legend=list(orientation='h', y=-0.3))
     )
   
-  # df_teams %>% ggplot(aes(x=Date, y=Steps, group=Team)) + 
+  # df_teams %>% ggplot(aes(x=Date, y=Steps, group=Team)) +
   #   geom_line(color='gray', alpha=0.4) +
-  #   geom_line(data=df_teams[df_teams$Team=='Holy Walkamolies',], aes(x=Date, y=Steps), color='#35a4dc') +
+  #   geom_line(data=df_teams[df_teams$Team=='ARR We There Yet?',], aes(x=Date, y=Steps), color='#35a4dc') +
   #   theme_minimal() + ylab('Steps') + xlab('')
+  
+  df_people %>% ggplot(aes(x=Date, y=Steps, group=Person)) +
+    geom_line(color='gray', alpha=0.4) +
+    geom_line(data=df_people[df_people$Person=='Laura',], aes(x=Date, y=Steps), color='#35a4dc') +
+    theme_minimal() + ylab('Steps') + xlab('')
   
   # COMPARISON WITH PREVIOUS YEAR PLOT
   
