@@ -1,0 +1,70 @@
+---
+title: "Steps Plot"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 9, fig.height = 5)
+library(ggplot2)
+library(dplyr)
+library(showtext)
+
+font_add_google('Quicksand', 'Quicksand')
+showtext_auto()
+```
+
+## Load data
+
+`global.R` holds the Google Sheets auth and wrangling; `get_data()` returns the processed data.
+
+```{r load-data}
+source('global.R')
+data = get_data()
+df_teams = data$df_teams
+```
+
+## Daily steps per team
+
+```{r steps-plot}
+# Team with the most steps overall gets highlighted
+top_team = df_teams %>% group_by(Team) %>% summarise(total=sum(Steps)) %>% slice_max(total, n=1) %>% pull(Team)
+
+plot_df = df_teams %>% mutate(is_top = Team == top_team)
+
+ggplot(plot_df, aes(x=Date, y=Steps, group=Team, color=is_top, alpha=is_top, linewidth=is_top)) +
+  geom_line() +
+  scale_color_manual(values=c('TRUE'='#4AE8B5', 'FALSE'='lightgray')) +
+  scale_alpha_manual(values=c('TRUE'=1, 'FALSE'=0.5)) +
+  scale_linewidth_manual(values=c('TRUE'=1.5, 'FALSE'=1)) +
+  scale_y_continuous(labels=scales::comma) +
+  labs(x='', y='Daily Steps') +
+  theme_minimal() +
+  theme(axis.text=element_text(family='Quicksand'),
+        axis.title=element_text(family='Quicksand'),
+        plot.title=element_text(family='Quicksand'),
+        legend.position='none')
+```
+
+## Daily steps per person
+
+`data$df_people` only holds the top 12, so this uses the full long-format data (`data$df`).
+
+```{r steps-plot-names}
+df_names = data$df_people %>% filter(Person != 'aux')
+
+top_name = df_names %>% group_by(Person) %>% summarise(total=sum(Steps, na.rm=TRUE)) %>% slice_max(total, n=1) %>% pull(Person)
+
+names_df = df_names %>% mutate(is_top = Person == top_name)
+
+ggplot(names_df, aes(x=Date, y=Steps, group=Person, color=is_top, alpha=is_top, linewidth=is_top)) +
+  geom_line() +
+  scale_color_manual(values=c('TRUE'='#4AE8B5', 'FALSE'='lightgray')) +
+  scale_alpha_manual(values=c('TRUE'=1, 'FALSE'=0.5)) +
+  scale_linewidth_manual(values=c('TRUE'=1.5, 'FALSE'=0.5)) +
+  scale_y_continuous(labels=scales::comma) +
+  labs(x='', y='Daily Steps') +
+  theme_minimal() +
+  theme(axis.text=element_text(family='Quicksand'),
+        axis.title=element_text(family='Quicksand'),
+        legend.position='none')
+```
